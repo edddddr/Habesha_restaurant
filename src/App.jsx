@@ -1,7 +1,8 @@
 import "./App.css";
+import HabeshaRestaurant from "./Components/habesha/habesha.jsx";
 
 function App() {
-  return <h1>Heor</h1>;
+  return <HabeshaRestaurant />;
 }
 
 export default App;
