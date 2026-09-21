@@ -1,0 +1,1 @@
+export default function FooterMeta() { return <div className="copyright"><span>© 2025 Mesob House Habesha Dining. Authentic Ethiopian & Eritrean Heritage.</span><span>Gursha Hospitality &nbsp; Privacy Policy &nbsp; Terms of Table</span></div>; }

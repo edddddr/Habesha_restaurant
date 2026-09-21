@@ -1,6 +1,5 @@
 import { FaArrowRight, FaShoppingBag } from "react-icons/fa";
-import Header from "../../components/layout/Header";
-import Footer from "../../components/layout/Footer";
+import { Header, Footer } from "../../components/layout";
 import { dishes } from "../../data/menuData";
 import { formatBirr } from "../../utils/currency";
 import SpecialsPage from "../../pages/SpecialsPage";

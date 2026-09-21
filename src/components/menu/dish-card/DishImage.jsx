@@ -1,0 +1,1 @@
+export default function DishImage({ dish, onSelect }) { return <button className="dish-image-button" onClick={onSelect}><div className="dish-image"><img src={dish.image} alt={dish.name} /><span className="dish-tag">{dish.tag}</span><span className="spice-pill">{dish.spice}</span></div></button>; }
