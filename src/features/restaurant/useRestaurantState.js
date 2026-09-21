@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { dishes } from "../../data/menuData";
+import { useEffect, useRef, useState } from "react";
 
-export function useRestaurantState() {
+export function useRestaurantState(dishes) {
   const [page, setPage] = useState("specials");
   const [selectedId, setSelectedId] = useState(1);
-  const [cart, setCart] = useState({ 1: 1, 5: 1, 8: 1 });
+  const [cart, setCart] = useState({});
+  const seededCart = useRef(false);
+  useEffect(() => { if (dishes.length && !seededCart.current) { setCart(Object.fromEntries(dishes.slice(0, 3).map((dish) => [dish.id, 1]))); seededCart.current = true; } }, [dishes]);
   const add = (id) => setCart((current) => ({ ...current, [id]: (current[id] || 0) + 1 }));
   const change = (id, amount) => setCart((current) => { const next = { ...current, [id]: Math.max(0, (current[id] || 0) + amount) }; if (!next[id]) delete next[id]; return next; });
   const go = (nextPage) => { setPage(nextPage); window.scrollTo({ top: 0, behavior: "smooth" }); };
