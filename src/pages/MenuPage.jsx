@@ -1,6 +1,80 @@
 import { useState } from "react";
 import { FaFire, FaLeaf, FaSearch } from "react-icons/fa";
-const categories = ["All Dishes", "Traditional Stews & Wat", "Tibs & Grills", "Fasting & Vegan / Tsom", "Raw & Cured Delicacies / Kitfo", "Beverages & Tej"];
+const categories = [
+  "All Dishes",
+  "Traditional Stews & Wat",
+  "Tibs & Grills",
+  "Fasting & Vegan / Tsom",
+  "Raw & Cured Delicacies / Kitfo",
+  "Beverages & Tej",
+];
 import { DishCard } from "../components/menu";
 
-export default function MenuPage({ dishes, add, detail }) { const [category, setCategory] = useState("All Dishes"); const [query, setQuery] = useState(""); const visible = dishes.filter((dish) => (category === "All Dishes" || dish.category === category) && `${dish.name} ${dish.description}`.toLowerCase().includes(query.toLowerCase())); return <main className="page-main menu-page"><section className="section-heading"><p className="eyebrow">Handcrafted Gondar & Addis spices</p><h1>Our Complete Culinary Heritage</h1><p>Every dish is prepared daily from scratch using sun-dried spices, stone-ground legume flours, and clarified herbal butter sourced directly from highland farm cooperatives.</p></section><div className="menu-tools"><label className="search-box"><FaSearch /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search dishes by name, e.g. Kitfo, Shiro, Tibs, Doro Wat..." /></label><div className="dietary-chips"><span><FaLeaf /> 100% Pure Teff Injera</span><span><FaLeaf /> Fasting / Tsom Friendly</span><span><FaFire /> Berbere Spiced</span></div></div><div className="category-tabs">{categories.map((item) => <button className={category === item ? "selected" : ""} key={item} onClick={() => setCategory(item)}>{item} <small>({item === "All Dishes" ? dishes.length : dishes.filter((dish) => dish.category === item).length})</small></button>)}</div><div className="dish-grid">{visible.map((dish) => <DishCard key={dish.id} dish={dish} add={add} detail={detail} />)}</div></main>; }
+export default function MenuPage({ dishes, add, detail }) {
+  const [category, setCategory] = useState("All Dishes");
+  const [query, setQuery] = useState("");
+  const visible = dishes.filter(
+    (dish) =>
+      (category === "All Dishes" || dish.category === category) &&
+      `${dish.name} ${dish.description}`
+        .toLowerCase()
+        .includes(query.toLowerCase()),
+  );
+  return (
+    <main className="page-main menu-page">
+      <section className="section-heading">
+        <p className="eyebrow">Handcrafted Gondar & Addis spices</p>
+        <h1>Our Complete Culinary Heritage</h1>
+        <p>
+          Every dish is prepared daily from scratch using sun-dried spices,
+          stone-ground legume flours, and clarified herbal butter sourced
+          directly from highland farm cooperatives.
+        </p>
+      </section>
+      <div className="menu-tools">
+        <label className="search-box">
+          <FaSearch />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search dishes by name, e.g. Kitfo, Shiro, Tibs, Doro Wat..."
+          />
+        </label>
+        <div className="dietary-chips">
+          <span>
+            <FaLeaf /> 100% Pure Teff Injera
+          </span>
+          <span>
+            <FaLeaf /> Fasting / Tsom Friendly
+          </span>
+          <span>
+            <FaFire /> Berbere Spiced
+          </span>
+        </div>
+      </div>
+      <div className="category-tabs">
+        {categories.map((item) => (
+          <button
+            className={category === item ? "selected" : ""}
+            key={item}
+            onClick={() => setCategory(item)}
+          >
+            {item}{" "}
+            <small>
+              (
+              {item === "All Dishes"
+                ? dishes.length
+                : dishes.filter((dish) => dish.category === item).length}
+              )
+            </small>
+          </button>
+        ))}
+      </div>
+      <div className="dish-grid">
+        {visible.map((dish) => (
+          <DishCard key={dish.id} dish={dish} add={add} detail={detail} />
+        ))}
+      </div>
+    </main>
+  );
+}

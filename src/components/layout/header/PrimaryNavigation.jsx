@@ -1,1 +1,36 @@
-export default function PrimaryNavigation({ page, go }) { return <nav className="main-nav"><button className={page === "menu" ? "active" : ""} onClick={() => go("menu")}>Menu</button><button className={page === "specials" ? "active" : ""} onClick={() => go("specials")}>Featured<br />Dish</button><button className={page === "cart" ? "active" : ""} onClick={() => go("cart")}>Order &<br />Cart</button><button className={page === "checkout" ? "active" : ""} onClick={() => go("checkout")}>Delivery &<br />Checkout</button></nav>; }
+import { NavLink } from "react-router-dom";
+
+export default function PrimaryNavigation() {
+  return (
+    <nav className="main-nav">
+      <NavLink
+        to="/menu"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Menu
+      </NavLink>
+      <NavLink
+        to="/specials"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Featured
+        <br />
+        Dish
+      </NavLink>
+      <NavLink
+        to="/cart"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Order &<br />
+        Cart
+      </NavLink>
+      <NavLink
+        to="/checkout"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Delivery &<br />
+        Checkout
+      </NavLink>
+    </nav>
+  );
+}

@@ -7,9 +7,41 @@ const fallbackImages = [
 ];
 
 function normalizeItem(item, index) {
-  return { id: item.id, name: item.nameEn, short: item.nameEn, category: item.category, price: item.priceETB, tag: item.tagline || (item.isFasting ? "100% VEGAN / TSOM" : item.isSpecial ? "CHEF'S SPECIAL" : "HOUSE FAVORITE"), spice: item.spiceLevel, image: item.image || fallbackImages[index % fallbackImages.length], description: item.description, isFasting: item.isFasting, isSpecial: item.isSpecial, ingredients: item.ingredients || [], servings: item.servings || "Serves 1" };
+  return {
+    id: item.id,
+    name: item.nameEn,
+    short: item.nameEn,
+    category: item.category,
+    price: item.priceETB,
+    tag:
+      item.tagline ||
+      (item.isFasting
+        ? "100% VEGAN / TSOM"
+        : item.isSpecial
+          ? "CHEF'S SPECIAL"
+          : "HOUSE FAVORITE"),
+    spice: item.spiceLevel,
+    image: item.image || fallbackImages[index % fallbackImages.length],
+    description: item.description,
+    isFasting: item.isFasting,
+    isSpecial: item.isSpecial,
+    ingredients: item.ingredients || [],
+    servings: item.servings || "Serves 1",
+  };
 }
 
-async function request(path) { const response = await fetch(`${API_BASE_URL}${path}`); if (!response.ok) throw new Error(`Menu request failed with status ${response.status}`); const payload = await response.json(); if (!Array.isArray(payload.data)) throw new Error("The menu API returned an invalid response."); return payload.data; }
-export async function fetchMenu() { return (await request("/menu/")).map(normalizeItem); }
-export async function fetchSpecials() { return (await request("/menu/specials")).map(normalizeItem); }
+async function request(path) {
+  const response = await fetch(`${API_BASE_URL}${path}`);
+  if (!response.ok)
+    throw new Error(`Menu request failed with status ${response.status}`);
+  const payload = await response.json();
+  if (!Array.isArray(payload.data))
+    throw new Error("The menu API returned an invalid response.");
+  return payload.data;
+}
+export async function fetchMenu() {
+  return (await request("/menu/")).map(normalizeItem);
+}
+export async function fetchSpecials() {
+  return (await request("/menu/specials")).map(normalizeItem);
+}

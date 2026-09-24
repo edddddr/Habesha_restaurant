@@ -1,4 +1,65 @@
 import { FaArrowRight, FaMinus, FaPlus } from "react-icons/fa";
 import { formatBirr } from "../utils/currency";
+import { useNavigate } from "react-router-dom";
 
-export default function CartPage({ dishes, cart, change, go }) { const items = dishes.filter((d) => cart[d.id]); const subtotal = items.reduce((s, d) => s + d.price * cart[d.id], 0); return <main className="cart-page page-main"><p className="eyebrow">Communal feasting</p><h1>Your Gursha Basket</h1><div className="cart-layout"><section><h2>Clay Pot Stews & Provisions <small>({items.length} handcrafted selections)</small></h2>{items.map((dish) => <article className="cart-row" key={dish.id}><img src={dish.image} alt="" /><div><span className="dish-tag-static">{dish.tag}</span><h3>{dish.short || dish.name}</h3><p>{dish.description}</p></div><strong>{formatBirr(dish.price)}</strong><div className="quantity"><button onClick={() => change(dish.id, -1)}><FaMinus /></button>{cart[dish.id]}<button onClick={() => change(dish.id, 1)}><FaPlus /></button></div></article>)}</section><aside className="ledger"><h2>Basket Ledger</h2><p>Items Subtotal <b>{formatBirr(subtotal)}</b></p><p>100% Teff Injera Upgrade <b>ETB 60</b></p><p>Delivery Fee <b className="green-text">FREE</b></p><hr /><h3>Grand Total <strong>{formatBirr(subtotal + 60)}</strong></h3><button className="button button-primary" onClick={() => go("checkout")}>Proceed to Delivery Checkout <FaArrowRight /></button></aside></div></main>; }
+export default function CartPage({ dishes, cart, change }) {
+  const navigate = useNavigate();
+  const items = dishes.filter((d) => cart[d.id]);
+  const subtotal = items.reduce((s, d) => s + d.price * cart[d.id], 0);
+  return (
+    <main className="cart-page page-main">
+      <p className="eyebrow">Communal feasting</p>
+      <h1>Your Gursha Basket</h1>
+      <div className="cart-layout">
+        <section>
+          <h2>
+            Clay Pot Stews & Provisions{" "}
+            <small>({items.length} handcrafted selections)</small>
+          </h2>
+          {items.map((dish) => (
+            <article className="cart-row" key={dish.id}>
+              <img src={dish.image} alt="" />
+              <div>
+                <span className="dish-tag-static">{dish.tag}</span>
+                <h3>{dish.short || dish.name}</h3>
+                <p>{dish.description}</p>
+              </div>
+              <strong>{formatBirr(dish.price)}</strong>
+              <div className="quantity">
+                <button onClick={() => change(dish.id, -1)}>
+                  <FaMinus />
+                </button>
+                {cart[dish.id]}
+                <button onClick={() => change(dish.id, 1)}>
+                  <FaPlus />
+                </button>
+              </div>
+            </article>
+          ))}
+        </section>
+        <aside className="ledger">
+          <h2>Basket Ledger</h2>
+          <p>
+            Items Subtotal <b>{formatBirr(subtotal)}</b>
+          </p>
+          <p>
+            100% Teff Injera Upgrade <b>ETB 60</b>
+          </p>
+          <p>
+            Delivery Fee <b className="green-text">FREE</b>
+          </p>
+          <hr />
+          <h3>
+            Grand Total <strong>{formatBirr(subtotal + 60)}</strong>
+          </h3>
+          <button
+            className="button button-primary"
+            onClick={() => navigate("/checkout")}
+          >
+            Proceed to Delivery Checkout <FaArrowRight />
+          </button>
+        </aside>
+      </div>
+    </main>
+  );
+}
