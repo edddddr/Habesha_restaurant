@@ -1,9 +1,11 @@
+"use client";
+
 import { FaArrowRight, FaMinus, FaPlus } from "react-icons/fa";
 import { formatBirr } from "../utils/currency";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export default function CartPage({ dishes, cart, change }) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const items = dishes.filter((d) => cart[d.id]);
   const subtotal = items.reduce((s, d) => s + d.price * cart[d.id], 0);
   return (
@@ -54,7 +56,7 @@ export default function CartPage({ dishes, cart, change }) {
           </h3>
           <button
             className="button button-primary"
-            onClick={() => navigate("/checkout")}
+            onClick={() => router.push("/checkout")}
           >
             Proceed to Delivery Checkout <FaArrowRight />
           </button>

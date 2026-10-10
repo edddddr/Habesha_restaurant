@@ -1,6 +1,8 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+
+import { useRouter } from "next/navigation";
 export default function NotFoundPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
   return (
     <main className="not-found page-main">
       <div className="empty-mesob">
@@ -15,11 +17,11 @@ export default function NotFoundPage() {
       <div>
         <button
           className="button button-primary"
-          onClick={() => navigate("/specials")}
+          onClick={() => router.push("/specials")}
         >
           Return to Today's Specials
         </button>
-        <button className="button button-soft" onClick={() => navigate("/menu")}>
+        <button className="button button-soft" onClick={() => router.push("/menu")}>
           Explore Full Menu
         </button>
       </div>
