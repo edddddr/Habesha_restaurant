@@ -1,8 +1,10 @@
+"use client";
+
 import { FaCheck } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
   return (
     <main className="checkout-page page-main">
       <div className="checkout-steps">
@@ -76,7 +78,7 @@ export default function CheckoutPage() {
           </h3>
           <button
             className="button button-primary"
-            onClick={() => navigate("/specials")}
+            onClick={() => router.push("/specials")}
           >
             Confirm Order & Pay ETB 1,838
           </button>

@@ -1,3 +1,5 @@
+"use client";
+
 import { FaArrowRight, FaCoffee, FaFire, FaLeaf, FaStar } from "react-icons/fa";
 import { DishCard } from "../components/menu";
 

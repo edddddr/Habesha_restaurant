@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { FaFire, FaLeaf, FaSearch } from "react-icons/fa";
 const categories = [
